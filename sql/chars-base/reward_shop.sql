@@ -24,11 +24,3 @@ CREATE TABLE IF NOT EXISTS `reward_shop` (
   `CreatedBy` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COMMENT='Database Actions:\r\n\r\n1 = item\r\n2 = gold\r\n3 = name change\r\n4 = faction change\r\n5 = race change';
-
--- Data exporting was unselected.
-/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
-/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-
--- Redeem the code "123" to get 11 gold
-INSERT INTO reward_shop VALUES (1, 2, 11, 0, 123, 0, 0, 0,0);

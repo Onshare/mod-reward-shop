@@ -4,7 +4,7 @@
 SET
 @Entry 		:= 210002,
 @Model 		:= 16804, -- Elven Jeweler
-@Name 		:= "Matti",
+@Name 		:= "Caroline",
 @Title 		:= "cdkey exchange",
 @Icon 		:= "Speak",
 @GossipMenu := 0,

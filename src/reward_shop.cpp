@@ -74,7 +74,7 @@ public:
                 break;
             case 6:
                 CharacterDatabase.Query(
-                        "INSERT INTO `characters_cd_key` (`action`, `action_data`, `quantity`, `code`, `status`, `PlayerGUID`, `PlayerIP`, `CreatedBy`) VALUES(3, 0, 0, '{}', 0, 0, '0', '{}')",
+                        "INSERT INTO `reward_shop` (`action`, `action_data`, `quantity`, `code`, `status`, `PlayerGUID`, `PlayerIP`, `CreatedBy`) VALUES(3, 0, 0, '{}', 0, 0, '0', '{}')",
                         randomcode.str().c_str(), CreatedBy.c_str());
                 ChatHandler(player->GetSession()).PSendSysMessage("已成功创建,更改名字兑换码是 %s",
                                                                   randomcode.str().c_str());
@@ -82,7 +82,7 @@ public:
                 break;
             case 7:
                 CharacterDatabase.Query(
-                        "INSERT INTO `characters_cd_key` (`action`, `action_data`, `quantity`, `code`, `status`, `PlayerGUID`, `PlayerIP`,`CreatedBy`) VALUES(4, 0, 0, '{}', 0, 0, '0', '{}')",
+                        "INSERT INTO `reward_shop` (`action`, `action_data`, `quantity`, `code`, `status`, `PlayerGUID`, `PlayerIP`,`CreatedBy`) VALUES(4, 0, 0, '{}', 0, 0, '0', '{}')",
                         randomcode.str().c_str(), CreatedBy.c_str());
                 ChatHandler(player->GetSession()).PSendSysMessage("已成功创建,更改阵营兑换码是 %s",
                                                                   randomcode.str().c_str());
@@ -90,7 +90,7 @@ public:
                 break;
             case 8:
                 CharacterDatabase.Query(
-                        "INSERT INTO `characters_cd_key` (`action`, `action_data`, `quantity`, `code`, `status`, `PlayerGUID`, `PlayerIP`, `CreatedBy`) VALUES(5, 0, 0, '{}', 0, 0, '0', '{}')",
+                        "INSERT INTO `reward_shop` (`action`, `action_data`, `quantity`, `code`, `status`, `PlayerGUID`, `PlayerIP`, `CreatedBy`) VALUES(5, 0, 0, '{}', 0, 0, '0', '{}')",
                         randomcode.str().c_str(), CreatedBy.c_str());
                 ChatHandler(player->GetSession()).PSendSysMessage("已成功创建,更改种族兑换码是 %s",
                                                                   randomcode.str().c_str());
@@ -98,7 +98,7 @@ public:
                 break;
             case 9:
                 CharacterDatabase.Query(
-                        "INSERT INTO `characters_cd_key` (`action`, `action_data`, `quantity`, `code`, `status`, `PlayerGUID`, `PlayerIP`, `CreatedBy`) VALUES(6, 0, 0, '{}', 0, 0, '0', '{}')",
+                        "INSERT INTO `reward_shop` (`action`, `action_data`, `quantity`, `code`, `status`, `PlayerGUID`, `PlayerIP`, `CreatedBy`) VALUES(6, 0, 0, '{}', 0, 0, '0', '{}')",
                         randomcode.str().c_str(), CreatedBy.c_str());
                 ChatHandler(player->GetSession()).PSendSysMessage("已成功创建,角色直升兑换码是 %s",
                                                                   randomcode.str().c_str());
@@ -141,7 +141,6 @@ public:
             LoginDatabase.Query("UPDATE recruitment SET reward={} WHERE inviter='{}' AND friend='{}'", 1, username, friendEmail.c_str());
             player->AddItem(69999, 50);
             player->AddItem(38082, 4);
-            player->AddItem(33809, 1);
             ChatHandler(player->GetSession()).PSendSysMessage("招募奖励领取完成.");
             CloseGossipMenuFor(player);
             return true;
@@ -154,7 +153,7 @@ public:
 
         //检查代码
         QueryResult result = CharacterDatabase.Query(
-                "SELECT id, action, action_data, quantity, status FROM characters_cd_key WHERE code = '{}' AND status = {}",
+                "SELECT id, action, action_data, quantity, status FROM reward_shop WHERE code = '{}' AND status = {}",
                 rewardcode.c_str(), 0);
         std::size_t found = rewardcode.find_first_not_of(
                 "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890-");
@@ -225,7 +224,6 @@ public:
                     player->GiveLevel(80);
                     player->AddItem(69999, 50);
                     player->AddItem(38082, 4);
-                    player->AddItem(33809, 1);
                     ChatHandler(player->GetSession()).PSendSysMessage("兑换成功，角色等级升级到80级.");
                     break;
             }
@@ -233,7 +231,7 @@ public:
         } while (result->NextRow());
 
         CharacterDatabase.Query(
-                "UPDATE characters_cd_key SET status = 1, PlayerGUID = '{}', PlayerIP = '{}' WHERE code = '{}'", playerguid.GetRawValue(),
+                "UPDATE reward_shop SET status = 1, PlayerGUID = '{}', PlayerIP = '{}' WHERE code = '{}'", playerguid.GetRawValue(),
                 playerIP.c_str(), rewardcode.c_str());
         CloseGossipMenuFor(player);
         return true;
@@ -261,7 +259,7 @@ public:
         void UpdateAI(uint32 diff) override {
             if (say_timer <= diff) {
                 if (canSay) {
-                    me->Say("你有兑换码吗?我这里有很多神奇的物品!", LANG_UNIVERSAL);
+                    me->Say("欢迎!你想看看一些神奇的商品吗？", LANG_UNIVERSAL);
                     me->HandleEmoteCommand(EMOTE_ONESHOT_EXCLAMATION);
                     say_timer = 61000;
                 }
@@ -276,12 +274,7 @@ public:
     }
 };
 
-class reward_shop_conf : public WorldScript {
-public:
-    reward_shop_conf() : WorldScript("reward_shop") {}
-};
 
 void AddRewardShopScripts() {
     new reward_shop();
-    new reward_shop_conf();
 }
