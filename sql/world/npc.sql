@@ -2,16 +2,16 @@
 --	CODEBOX - 90024
 -- ######################################################--
 SET
-@Entry 		:= 92000,
+@Entry 		:= 210002,
 @Model 		:= 16804, -- Elven Jeweler
-@Name 		:= "Talamortis",
-@Title 		:= "Code exchange",
-@Icon 		:= "Buy",
+@Name 		:= "Matti",
+@Title 		:= "cdkey exchange",
+@Icon 		:= "Speak",
 @GossipMenu := 0,
 @MinLevel 	:= 80,
 @MaxLevel 	:= 80,
 @Faction 	:= 35,
-@NPCFlag 	:= 0,
+@NPCFlag 	:= 1,
 @Scale		:= 1.0,
 @Rank		:= 0,
 @Type 		:= 7,
@@ -22,14 +22,8 @@ SET
 
 -- NPC
 DELETE FROM creature_template WHERE entry = @Entry;
-INSERT INTO creature_template (`entry`, `modelid1`, `name`, `subname`, `IconName`, `gossip_menu_id`, `minlevel`, `maxlevel`, `faction`, `npcflag`, `speed_walk`, `speed_run`, `scale`, `rank`, `unit_class`, `unit_flags`, `type`, `type_flags`, `RegenHealth`, `flags_extra`, `AiName`, `ScriptName`) VALUES
-(@Entry, @Model, @Name, @Title, @Icon, @GossipMenu, @MinLevel, @MaxLevel, @Faction, @NPCFlag, 1, 1.14286, @Scale, @Rank, 1, 2, @Type, @TypeFlags, 1, @FlagsExtra, @AIName, @Script);
+INSERT INTO `acore_world`.`creature_template`(`entry`, `difficulty_entry_1`, `difficulty_entry_2`, `difficulty_entry_3`, `KillCredit1`, `KillCredit2`, `modelid1`, `modelid2`, `modelid3`, `modelid4`, `name`, `subname`, `IconName`, `gossip_menu_id`, `minlevel`, `maxlevel`, `exp`, `faction`, `npcflag`, `speed_walk`, `speed_run`, `speed_swim`, `speed_flight`, `detection_range`, `scale`, `rank`, `dmgschool`, `DamageModifier`, `BaseAttackTime`, `RangeAttackTime`, `BaseVariance`, `RangeVariance`, `unit_class`, `unit_flags`, `unit_flags2`, `dynamicflags`, `family`, `trainer_type`, `trainer_spell`, `trainer_class`, `trainer_race`, `type`, `type_flags`, `lootid`, `pickpocketloot`, `skinloot`, `PetSpellDataId`, `VehicleId`, `mingold`, `maxgold`, `AIName`, `MovementType`, `HoverHeight`, `HealthModifier`, `ManaModifier`, `ArmorModifier`, `ExperienceModifier`, `RacialLeader`, `movementId`, `RegenHealth`, `mechanic_immune_mask`, `spell_school_immune_mask`, `flags_extra`, `ScriptName`, `VerifiedBuild`) VALUES (210002, 0, 0, 0, 0, 0, 16804, 0, 0, 0, 'Matti', 'cdkey exchange', 'Speak', 0, 80, 80, 0, 35, 1, 1, 1.14286, 1, 1, 20, 1, 0, 0, 1, 2000, 2000, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 138936390, 0, 0, 0, 0, 0, 0, 0, 'SmartAI', 0, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 2, 'reward_shop', NULL);
 
 -- NPC Text
 DELETE FROM `npc_text` WHERE `ID`=@Entry;
-INSERT INTO `npc_text` (`ID`, `text0_0`) VALUES (@Entry, 'Greetings $N. Do you have a code to redeem?');
-
--- creatture_template_movement
-DELETE FROM `creature_template_movement` WHERE `CreatureId` IN (@Entry);
-INSERT INTO `creature_template_movement` (`CreatureId`, `Ground`, `Swim`, `Flight`, `Rooted`, `Chase`, `Random`, `InteractionPauseTimer`) VALUES
-(@Entry, 1, 1, 0, 0, 0, 0, NULL);
+INSERT INTO `npc_text` (`ID`, `text0_0`, `text0_1`) VALUES (@Entry, '欢迎你,$N. 有什么可以帮助你的吗?', '欢迎你,$N. 有什么可以帮助你的吗?');

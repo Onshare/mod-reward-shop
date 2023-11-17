@@ -1,24 +1,24 @@
 [worldserver]
 
 #
-#    RewardShopEnable
-#        Description: Enable or Disable the NPC ingame shop.
-#        Default:     Enabled  = 1
-#                     Disabled = 0
+#    是否启用兑换码
+#        描述：启用或禁用兑换码
+#        Default:     启用 = 1
+#                     禁用 = 0
 
 RewardShopEnable = 1
 
 #
 #    WebsiteAddress
-#        Description: This is what the NPC say's when a player clicks "How do i get a code?"
-#        Default:     "You can get codes by visiting the online store at (Website Here)"
+#        描述：这是NPC在玩家点击“如何获得兑换码？”时说的话
+#        默认设置：“您可以通过访问网站获取”
 
-WebsiteAddress = "You can get codes by visiting the online store at: www.wildhammer.co.uk"
+WebsiteAddress = "$B兑换码是玩家获取游戏内物品的一种特殊方式，主要用于发放物品及活动奖励。除此之外也能兑换一些特殊的服务，目前支持的服务有：$B角色直升80级$B更改角色名字$B更改角色种族$B更改角色阵营。$B$B该如何获得兑换码？$B联系QQ群(568034833)管理员获得兑换码。"
 
 #
-#    AllowGM
-#        Description: This allows GMs to generate codes from the creature itself without having to visit the store (Will save GM name who generate the code)
-#        Default:     Enabled  = 1
-#                     Disabled = 0
+#    是否启用管理员生成兑换码按钮
+#        描述：GM权限对话是否多一个生成兑换码的按钮
+#        Default:     启用 = 1
+#                     禁用 = 0
 
-AllowGM = 0
+AllowGM = 1
