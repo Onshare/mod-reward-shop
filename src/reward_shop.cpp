@@ -197,10 +197,7 @@ public:
                     if (count == 0 || dest.empty()) {
                         ChatHandler(player->GetSession()).PSendSysMessage("无法完成兑换,因为物品是唯一或没有足够空间.");
                         ChatHandler(player->GetSession()).SetSentErrorMessage(true);
-                        return false;
-                    }
-
-                    if (count > 0 && action_data) {
+                    } else if (count > 0 && action_data) {
                         player->AddItem(action_data, quantity);
                     }
                     break;
