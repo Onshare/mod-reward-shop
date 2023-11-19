@@ -28,6 +28,7 @@ public:
         if (!sConfigMgr->GetOption<bool>("RewardShopEnable", 0))
             return false;
 
+        
 
         std::string text = "点击接受然后输入兑换码";
         AddGossipItemFor(player, GOSSIP_ICON_CHAT, "我想兑换我的兑换码.", GOSSIP_SENDER_MAIN, 1, text, 0, true);
@@ -37,7 +38,7 @@ public:
         if (sConfigMgr->GetOption<bool>("AllowGM", 1))
             if (player->IsGameMaster())
                 AddGossipItemFor(player, GOSSIP_ICON_BATTLE, "[GM]生成一个兑换码.", GOSSIP_SENDER_MAIN, 4);
-        SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+        SendGossipMenuFor(player, 856003, creature->GetGUID());
         return true;
     }
 
@@ -70,7 +71,7 @@ public:
                 AddGossipItemFor(player, GOSSIP_ICON_CHAT, "生成更改种族兑换码.", GOSSIP_SENDER_MAIN, 8);
                 AddGossipItemFor(player, GOSSIP_ICON_CHAT, "生成角色直升兑换码.", GOSSIP_SENDER_MAIN, 9);
                 AddGossipItemFor(player, GOSSIP_ICON_CHAT, "暂时不需要生成任何兑换码.", GOSSIP_SENDER_MAIN, 10);
-                SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                SendGossipMenuFor(player, 856003, creature->GetGUID());
                 break;
             case 6:
                 CharacterDatabase.Query(
